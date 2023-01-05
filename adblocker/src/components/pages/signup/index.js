@@ -3,6 +3,7 @@ import { Container, Box,
   Avatar, Typography,
   Grid, TextField, Button, Link } from '@mui/material';
 import * as EmailValidator from 'email-validator';
+import axios from 'axios';
 
 export default function SignUp() {
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -11,15 +12,15 @@ export default function SignUp() {
   const [password, setPassword] = useState({ value: '', isValid: true });
   const [confirmPassword, setConfirmPassword] = useState({ value: '', isValid: true });
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
     
     if (email.isValid && password.isValid && confirmPassword.isValid) {
-      console.log({
-        email: data.get('email'),
-        password: data.get('password'),
+      const tokens = await axios.post(`${process.env.REACT_APP_SERVER_LINK}/register`, {
+        'email': email.value,
+        'password': password.value,
       });
+      console.log(tokens);
     }
     
   };
