@@ -61,7 +61,7 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 error={!password.isValid}
-                helperText={password.isValid ? "" : "Password should have minimum 8 characters, at least 1 letter and 1 number"}
+                helperText={password.isValid ? "" : "Password must have minimum 8 characters, at least 1 letter and 1 number"}
                 onChange={e => {
                   const newPassword = e.target.value;
                   setPassword({ value: newPassword, isValid: newPassword.match(passwordRegex) })
@@ -75,7 +75,7 @@ export default function SignUp() {
                 fullWidth
                 name="password"
                 label="Confirm password"
-                type="confirm-password"
+                type="password"
                 id="confirm-password"
                 error={!confirmPassword.isValid}
                 helperText={confirmPassword.isValid ? "" : "Password missmatch"}
